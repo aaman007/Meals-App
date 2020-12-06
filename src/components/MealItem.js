@@ -3,6 +3,7 @@ import {
     View,
     Text,
     TouchableOpacity,
+    TouchableNativeFeedback,
     StyleSheet,
     ImageBackground,
     Platform
@@ -12,9 +13,15 @@ import WhiteText from "./WhiteText";
 import colors from "../constants/colors";
 
 const MealItem = props => {
+    let TouchableComponent = TouchableOpacity;
+
+    if (Platform.OS === 'android' && Platform.Version >= 21) {
+        TouchableComponent = TouchableNativeFeedback;
+    }
+
     return (
         <View style={styles.mealItem}>
-            <TouchableOpacity onPress={props.onSelect}>
+            <TouchableComponent onPress={props.onSelect}>
                 <View>
                     <View style={{...styles.mealRow, ...styles.mealHeader}}>
                         <ImageBackground source={{uri: props.meal.imageUrl}} style={styles.bgImage}>
@@ -29,7 +36,7 @@ const MealItem = props => {
                         <WhiteText> {props.meal.affordability.toUpperCase()} </WhiteText>
                     </View>
                 </View>
-            </TouchableOpacity>
+            </TouchableComponent>
         </View>
     )
 };
