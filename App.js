@@ -1,13 +1,13 @@
-import { StatusBar } from 'expo-status-bar';
 import React, { useState } from 'react';
-import { StyleSheet, Text, View } from 'react-native';
-
 import * as Font from 'expo-font';
 import { AppLoading } from "expo";
+import { enableScreens } from "react-native-screens";
 
-import CategoriesScreen from "./src/screens/CategoriesScreen";
+import MainDrawerNavigator from "./src/navigations/MainDrawerNavigator";
 
-import Center from "./src/components/Center";
+
+// Optimizes performance for complex applications
+enableScreens();
 
 const fetchFonts = () => {
   return Font.loadAsync({
@@ -24,17 +24,6 @@ export default function App() {
   }
 
   return (
-    <View style={styles.screen}>
-      <Center>
-        <CategoriesScreen />
-      </Center>
-      <StatusBar style="auto" />
-    </View>
+    <MainDrawerNavigator />
   );
 }
-
-const styles = StyleSheet.create({
-  screen: {
-    flex: 1
-  }
-});
